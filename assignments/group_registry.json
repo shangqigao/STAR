@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 5,
   "groups": {
     "group_a": {
       "label": "Group A",
@@ -40,6 +40,127 @@
       "phase_2_image_count": 500,
       "assigned_user_id": "radiologist_5",
       "assigned_at": "2026-09-14T10:06:27.258099+00:00"
+    },
+    "group_f": {
+      "label": "Group F",
+      "image_count": 1000,
+      "phase_1_image_count": 500,
+      "phase_3_image_count": 500,
+      "assigned_user_id": "radiologist_6",
+      "assigned_at": "2026-09-28T20:07:56.682282+00:00"
+    },
+    "group_g": {
+      "label": "Group G",
+      "image_count": 1000,
+      "phase_1_image_count": 500,
+      "phase_3_image_count": 500,
+      "assigned_user_id": "radiologist_7",
+      "assigned_at": "2026-09-28T20:09:02.032929+00:00"
+    },
+    "group_h": {
+      "label": "Group H",
+      "image_count": 1000,
+      "phase_1_image_count": 500,
+      "phase_3_image_count": 500,
+      "assigned_user_id": "radiologist_8",
+      "assigned_at": "2026-09-28T20:09:24.038387+00:00"
+    },
+    "group_i": {
+      "label": "Group I",
+      "image_count": 1000,
+      "phase_1_image_count": 500,
+      "phase_3_image_count": 500,
+      "assigned_user_id": "radiologist_9",
+      "assigned_at": "2026-09-28T20:09:36.413168+00:00"
+    },
+    "group_j": {
+      "label": "Group J",
+      "image_count": 1000,
+      "phase_1_image_count": 500,
+      "phase_3_image_count": 500,
+      "assigned_user_id": "radiologist_10",
+      "assigned_at": "2026-09-28T20:09:49.385015+00:00"
+    },
+    "group_k": {
+      "label": "Group K",
+      "image_count": 1000,
+      "phase_1_image_count": 500,
+      "phase_3_image_count": 500,
+      "assigned_user_id": "radiologist_11",
+      "assigned_at": "2026-09-28T20:10:00.696610+00:00"
+    },
+    "group_l": {
+      "label": "Group L",
+      "image_count": 1000,
+      "phase_1_image_count": 500,
+      "phase_3_image_count": 500,
+      "assigned_user_id": "radiologist_12",
+      "assigned_at": "2026-09-28T20:10:11.497063+00:00"
+    },
+    "group_m": {
+      "label": "Group M",
+      "image_count": 1000,
+      "phase_1_image_count": 500,
+      "phase_3_image_count": 500,
+      "assigned_user_id": "radiologist_13",
+      "assigned_at": "2026-09-28T20:10:34.348638+00:00"
+    },
+    "group_n": {
+      "label": "Group N",
+      "image_count": 1000,
+      "phase_1_image_count": 500,
+      "phase_3_image_count": 500,
+      "assigned_user_id": "radiologist_14",
+      "assigned_at": "2026-09-28T20:10:53.006032+00:00"
+    },
+    "group_o": {
+      "label": "Group O",
+      "image_count": 1000,
+      "phase_1_image_count": 500,
+      "phase_3_image_count": 500,
+      "assigned_user_id": "radiologist_15",
+      "assigned_at": "2026-09-28T20:11:05.001383+00:00"
+    },
+    "group_p": {
+      "label": "Group P",
+      "image_count": 1000,
+      "phase_1_image_count": 500,
+      "phase_3_image_count": 500,
+      "assigned_user_id": "radiologist_16",
+      "assigned_at": "2026-09-28T20:11:16.762256+00:00"
+    },
+    "group_q": {
+      "label": "Group Q",
+      "image_count": 1000,
+      "phase_1_image_count": 500,
+      "phase_3_image_count": 500,
+      "assigned_user_id": "radiologist_17",
+      "assigned_at": "2026-09-28T20:11:28.357301+00:00"
+    },
+    "group_r": {
+      "label": "Group R",
+      "image_count": 1000,
+      "phase_1_image_count": 500,
+      "phase_3_image_count": 500,
+      "assigned_user_id": "radiologist_18",
+      "assigned_at": "2026-09-28T20:11:38.758419+00:00"
+    },
+    "group_s": {
+      "label": "Group S",
+      "image_count": 1000,
+      "phase_1_image_count": 500,
+      "phase_3_image_count": 500,
+      "assigned_user_id": "radiologist_19",
+      "assigned_at": "2026-09-28T20:11:48.656277+00:00"
+    },
+    "group_t": {
+      "label": "Group T",
+      "image_count": 1065,
+      "phase_1_image_count": 500,
+      "phase_3_image_count": 565,
+      "assigned_user_id": "radiologist_20",
+      "assigned_at": "2026-09-28T20:12:00.624903+00:00"
     }
-  }
+  },
+  "phase_3_added_at": "2026-09-28T11:28:26.392294+00:00"
 }

@@ -45,7 +45,7 @@ STAGES = ["q1", "q_lymph_node", "q2", "q4", "complete"]
 MANIFEST_ORDER_SEED = "STAR_v1_deterministic_shuffle"
 MAX_CURVE_POINTS = 300
 GENERAL_USER_TYPES = {"human", "mllm"}
-RADIOLOGIST_GROUPS = ("group_a", "group_b", "group_c", "group_d", "group_e")
+RADIOLOGIST_GROUPS = tuple(f"group_{chr(code)}" for code in range(ord("a"), ord("t") + 1))
 SPECIALIST_GROUPS = {"radiologist": RADIOLOGIST_GROUPS}
 VALID_USER_TYPES = GENERAL_USER_TYPES | set(SPECIALIST_GROUPS)
 ASSIGNMENT_LOCK = threading.Lock()
@@ -596,25 +596,26 @@ def radiologist_phase_status(user: dict, group: dict | None = None) -> dict:
             raise ValueError("Radiologist user has an invalid assignment group.")
     completed = set(user.get("completed_image_ids", []))
     phase_1_ids = group["phase_1_image_ids"]
-    phase_2_ids = group["phase_2_image_ids"]
+    followup_phase = "phase_2" if "phase_2_image_ids" in group else "phase_3"
+    followup_ids = group[f"{followup_phase}_image_ids"]
     phase_1_completed = len(completed.intersection(phase_1_ids))
-    phase_2_completed = len(completed.intersection(phase_2_ids))
+    followup_completed = len(completed.intersection(followup_ids))
     if phase_1_completed < len(phase_1_ids):
         phase = "phase_1"
         phase_ids = phase_1_ids
         phase_completed = phase_1_completed
     else:
-        phase = "phase_2"
-        phase_ids = phase_2_ids
-        phase_completed = phase_2_completed
+        phase = followup_phase
+        phase_ids = followup_ids
+        phase_completed = followup_completed
     return {
         "study_phase": phase,
         "image_ids": phase_ids,
         "phase_completed": phase_completed,
         "phase_total": len(phase_ids),
-        "overall_completed": phase_1_completed + phase_2_completed,
-        "overall_total": len(phase_1_ids) + len(phase_2_ids),
-        "done": phase_1_completed == len(phase_1_ids) and phase_2_completed == len(phase_2_ids),
+        "overall_completed": phase_1_completed + followup_completed,
+        "overall_total": len(phase_1_ids) + len(followup_ids),
+        "done": phase_1_completed == len(phase_1_ids) and followup_completed == len(followup_ids),
     }
 
 
@@ -625,8 +626,9 @@ def assignment_metadata(user: dict, image_id: str) -> dict:
     group = load_radiologist_groups()["groups"][group_id]
     if image_id in set(group["phase_1_image_ids"]):
         return {"study_phase": "phase_1", "assignment_group": group_id, "assignment_kind": "shared"}
-    if image_id in set(group["phase_2_image_ids"]):
-        return {"study_phase": "phase_2", "assignment_group": group_id, "assignment_kind": "exclusive"}
+    for phase in ("phase_2", "phase_3"):
+        if image_id in set(group.get(f"{phase}_image_ids", [])):
+            return {"study_phase": phase, "assignment_group": group_id, "assignment_kind": "exclusive"}
     raise ValueError("Image is outside this radiologist assignment.")
 
 
@@ -826,7 +828,7 @@ def public_task(user: dict, manifest: list[dict]) -> dict:
         payload["assignment_label"] = group["label"]
         payload.update({key: phase[key] for key in ("study_phase", "phase_completed", "phase_total")})
         payload["phase_transition"] = (
-            phase["study_phase"] == "phase_2"
+            phase["study_phase"] in {"phase_2", "phase_3"}
             and phase["phase_completed"] == 0
             and payload["stage"] == "q1"
         )

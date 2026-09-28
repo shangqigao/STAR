@@ -199,8 +199,8 @@ function renderTask(task) {
   el.assignmentLabel.textContent = assignmentName ? `Assignment: ${assignmentName}` : "";
   el.assignmentLabel.classList.toggle("hidden", !assignmentName);
   const isPhased = Boolean(task.study_phase);
-  const phaseNumber = task.study_phase === "phase_2" ? 2 : 1;
-  el.phaseLabel.textContent = isPhased ? `Phase ${phaseNumber} of 2` : "";
+  const phaseNumber = task.study_phase === "phase_3" ? 3 : task.study_phase === "phase_2" ? 2 : 1;
+  el.phaseLabel.textContent = isPhased ? `Phase ${phaseNumber}` : "";
   el.phaseLabel.classList.toggle("hidden", !isPhased);
   el.overallProgressLabel.textContent = isPhased
     ? `${task.overall_completed} / ${task.overall_total} overall`

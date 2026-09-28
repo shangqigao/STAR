@@ -63,15 +63,25 @@ The generated files are:
 - `assignments/radiologist_groups.json`: immutable image membership, stratification metadata, and source provenance.
 - `assignments/group_registry.json`: persistent group claims by specialist users.
 
-Human users continue to receive the complete manifest. New radiologist users
-atomically claim one of five anonymous groups, A–E. Every group contains
+Human users continue to receive the complete manifest. The original five
+radiologists atomically claimed anonymous Groups A–E. Every original group contains
 the same 500 Phase 1 images followed by 500 group-specific Phase 2 images, for
 1,000 answers per radiologist. Phase 2 starts automatically when Phase 1 is
 complete. The 3,000 unique sampled images use the frozen dataset, region, site,
 and lymph-node quotas in the assignment generator. Phase 1/Phase 2 are neutral
 UI labels; shared/exclusive status is not exposed. A returning user always
-resumes the existing group. Once all
-five groups have been claimed, registration returns HTTP 409 with the
+resumes the existing group.
+
+## Additional radiologists: Phase 3
+
+`python3 web/generate_radiologist_phase3.py` preserves Groups A–E and all of
+their Phase 1/2 image IDs. It adds Groups F–T for new radiologists. Each new
+radiologist first answers the same 500 shared Phase 1 images, then automatically
+continues to a non-overlapping Phase 3 group. Groups F–S contain 500 Phase 3
+images each; Group T contains the final 565. Together, the Phase 3 groups cover
+all 7,565 No-issue images not already present in Phase 1 or Phase 2.
+New registrations claim the first available group from F–T. Once all available
+groups have been claimed, registration returns HTTP 409 with the
 `no_available_group` code.
 
 The UI does not reveal the stratification fields or show accuracy feedback to
